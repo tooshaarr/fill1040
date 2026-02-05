@@ -1,23 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upload XLSX and Fill PDF</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Form PDF Filler</title>
 </head>
 <body>
   <div class="container">
-    <h1>Upload XLSX and Fill PDF</h1>
-    <div class="actions">
-      <label class="file-upload">
-        <input type="file" id="xlsxFile" accept=".xlsx" />
-        Choose File
-      </label>
-      <button id="downloadPdf" class="download-btn">Download Filled PDF</button>
-    </div>
+    <header>
+      <h1>📝 Tax Form PDF Filler</h1>
+      <p>Automatically fill IRS tax forms from Excel spreadsheets</p>
+      <p style="font-size: 0.9rem; color: #64748b; margin-top: 0.5rem;">Currently supports: Form 1040, Form 8949 • More forms coming soon!</p>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>1. Select Tax Year</h2>
+        <div class="form-group">
+          <label for="taxYear">Tax Year:</label>
+          <select id="taxYear">
+            <option value="2025">2025</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>2. Upload Excel File</h2>
+        <div class="form-group">
+          <label for="xlsxFile">Choose Excel file (.xlsx):</label>
+          <input type="file" id="xlsxFile" accept=".xlsx,.xls" />
+        </div>
+        <div id="status" class="status status-info">
+          Ready. Please upload an Excel file.
+        </div>
+        <pre id="formsInfo" class="forms-info"></pre>
+      </div>
+
+      <div class="card">
+        <h2>3. Download Filled PDFs</h2>
+        <button id="downloadPdf" class="btn btn-primary" disabled>
+          📥 Download Filled PDFs (ZIP)
+        </button>
+      </div>
+
+      <div class="card info-card">
+        <h3>🔒 Privacy & Security</h3>
+        <p><strong>Your data never leaves your computer.</strong> This application runs entirely in your browser (client-side). No data is uploaded to any server. Your Excel file and PDFs are processed locally on your device.</p>
+        <p>💡 <em>Tip:</em> Your Excel file only needs numerical data (amounts, dates, quantities) - no personal information like names, addresses, or SSN is required.</p>
+      </div>
+
+      <div class="card info-card">
+        <h3>ℹ️ How to Use</h3>
+<div class="card info-card">
+  <h3>ℹ️ How to Use</h3>
+      <ol>
+        <li><strong>Select your tax year</strong> from the dropdown</li>
+        <li><strong>Prepare one Excel file</strong> with sheets named:
+          <ul>
+            <li><code>f1040</code> - Form 1040 data</li>
+            <li><code>f8949</code> - Capital gains/losses</li>
+          </ul>
+          <div style="background: #fef9c3; padding: 0.75rem; border-radius: 0.5rem; margin-top: 0.75rem; border: 1px solid #fde047;">
+            <a href="./templates/2025_template.xlsx" download style="color: #854d0e; text-decoration: underline; font-weight: bold;">
+              Download our Excel template
+            </a> with pre-formatted sheets and column headers.
+          </div>
+        </li>
+        <li><strong>Upload the Excel file</strong> - The app will parse your data</li>
+        <li><strong>Download the ZIP file</strong> containing all filled PDFs</li>
+      </ol>
+
+      <h3>✨ What Each Form Does</h3>
+      
+        <h4>Form 1040 - Individual Income Tax Return</h4>
+        <ul>
+          <li>Automatically fills all line items from your data</li>
+          <li>Performs addition and subtraction calculations</li>
+          <li>Computes totals across pages</li>
+        </ul>
+
+        <h4>Form 8949 - Capital Gains & Losses</h4>
+        <ul>
+          <li>Calculates gain/loss for each transaction (Proceeds - Cost - Adjustment)</li>
+          <li>Automatically separates short-term (≤1 year) and long-term (>1 year) based on dates</li>
+          <li>Computes total proceeds, total cost basis, and total gain/loss</li>
+          <li>Creates multiple 8949 forms if you have more data</li>
+        </ul>
+
+
+
+
+        <!-- <h3>🛠️ Developer Tools</h3>
+        <p>Open browser console and use:</p>
+        <ul>
+          <li><code>debugApp.printFields('f8949')</code> - List all fields in a form</li>
+          <li><code>debugApp.generateFieldMap('f8949')</code> - Generate labeled PDF</li>
+          <li><code>debugApp.getSupportedForms()</code> - List supported forms</li>
+        </ul> -->
+      </div>
+    </main>
+
+    <footer>
+      <p>Made with ❤️ and Claude for easier tax filing</p>
+      <p class="disclaimer">⚠️ This tool is for convenience only. Please verify all filled forms before submission.</p>
+    </footer>
   </div>
+
   <script type="module" src="/src/main.ts"></script>
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e866bb52ee684e3ab6ac82fcc4da0557"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
